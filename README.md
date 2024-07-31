@@ -52,7 +52,7 @@ This project aims to develop a Large Language Model (LLM) specifically trained t
 
 1. Clone the repository:
    ```
-   git clone [repository-url]
+   git clone https://github.com/swarmourr/Pegasus-wm-llm.git
    cd pegasus-wms-llm
    ```
 
@@ -95,7 +95,7 @@ This project aims to develop a Large Language Model (LLM) specifically trained t
    ```
    python OnlineWebDoc/doc.py
    ```
-2. Open a browser and go to `http://localhost:8000`.
+2. Open a browser and go to `http://localhost:5000`.
 
 ## Model Information
 
@@ -124,7 +124,6 @@ Contributions are welcome! Please follow these steps:
 
 ## Contact
 
-[Your contact information or project maintainer's contact]
 
 ```
 

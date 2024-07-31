@@ -13,7 +13,7 @@ This project aims to develop a Large Language Model (LLM) specifically trained t
 
 ## Project Structure
 
-```
+```bash
 .
 ├── FinetuneLLmPegasus
 │   ├── MainFineTune.ipynb

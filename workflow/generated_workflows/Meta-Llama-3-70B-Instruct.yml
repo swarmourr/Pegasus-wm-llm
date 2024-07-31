@@ -1,0 +1,72 @@
+x-pegasus:
+  apiLang: python
+  createdBy: hamzasafri
+  createdOn: 07-16-24T16:15:28Z
+pegasus: 5.0.4
+name: Meta-Llama-3-70B-Instruct
+siteCatalog:
+  sites:
+  - name: local
+    directories:
+    - type: sharedScratch
+      path: /Users/hamzasafri/Desktop/Projects/finetune pegasus/workflow/scratch
+      sharedFileSystem: false
+      fileServers:
+      - url: file:///Users/hamzasafri/Desktop/Projects/finetune pegasus/workflow/scratch
+        operation: all
+    - type: localStorage
+      path: /Users/hamzasafri/Desktop/Projects/finetune pegasus/workflow/output
+      sharedFileSystem: false
+      fileServers:
+      - url: file:///Users/hamzasafri/Desktop/Projects/finetune pegasus/workflow/output
+        operation: all
+  - name: condorpool
+    directories: []
+    profiles:
+      condor:
+        universe: vanilla
+      pegasus:
+        style: condor
+replicaCatalog:
+  replicas:
+  - lfn: pegasus_data
+    pfns:
+    - site: local
+      pfn: /Users/hamzasafri/Desktop/Projects/finetune pegasus/workflow/data/data.json
+transformationCatalog:
+  transformations:
+  - name: FineTuneLLM
+    sites:
+    - name: condorpool
+      pfn: /Users/hamzasafri/Desktop/Projects/finetune pegasus/workflow/bin/finetune.py
+      type: stageable
+      container: FineTuneLLM
+    profiles:
+      pegasus:
+        cores: 16
+        runtime: 14400
+        memory: 16384
+        gpus: 4
+  containers:
+  - name: FineTuneLLM
+    type: singularity
+    image: docker://swarmourr/FineTuneLLM
+    image.site: docker_hub
+jobs:
+- type: job
+  name: FineTuneLLM
+  id: ID0000001
+  arguments:
+  - --data_path pegasus_data --model_name meta-llama/Meta-Llama-3-70B-Instruct --output_dir
+    ['meta-llama/Meta-Llama-3-8B-Instruct', 'meta-llama/Meta-Llama-3-70B-Instruct',
+    'meta-llama/Llama-2-7b-chat-hf', 'tiiuae/falcon-7b', 'mistralai/Mistral-7B-Instruct-v0.3']
+    --num_train_epochs 3 --batch_size 4 --save_steps 5000 --learning_rate 3e-05 --auth_token
+    YOUR_AUTH_TOKEN
+  uses:
+  - lfn: pegasus_data
+    type: input
+  - lfn: Meta-Llama-3-70B-Instruct.zip
+    type: output
+    stageOut: true
+    registerReplica: true
+jobDependencies: []

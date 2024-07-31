@@ -118,13 +118,5 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch.
 5. Create a new Pull Request.
 
-## License
-
-[Specify your license here]
-
-## Contact
 
 
-```
-
-This README is now more tailored to your specific project of building an LLM assistant for Pegasus WMS. It highlights the main goals of the project, explains the key components, and provides instructions for setup and usage that are relevant to working with Pegasus WMS documentation and workflow creation. Feel free to adjust any details to better match your project's current state and specific requirements.
